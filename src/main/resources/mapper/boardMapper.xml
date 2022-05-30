@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="board">
+<mapper namespace="Board">
     <insert id="save" parameterType="board">
         insert into board_table(boardWriter, boardPassword, boardTitle, boardContents, boardCreatedDate)
         values (#{boardWriter}, #{boardPassword}, #{boardTitle}, #{boardContents}, now())
