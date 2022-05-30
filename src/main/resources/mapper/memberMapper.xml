@@ -4,5 +4,21 @@
 
 
 <mapper namespace="Member">
+    <insert id="save" parameterType="member">
+        insert into member_table(memberId, memberPassword, memberName, memberEmail, memberPhone, memberProfile)
+            values  (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, #{memberPhone}, #{memberProfile})
+    </insert>
+
+    <select id="login" parameterType="member" resultType="member">
+        select * from member_table where memberId=#{memberId} and memberPassword=#{memberPassword}
+    </select>
+
+    <select id="findAll" parameterType="member">
+        select * from member_table
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="member">
+        select * from member_table where id=#{id}
+    </select>
 
 </mapper>
