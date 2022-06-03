@@ -19,7 +19,7 @@
 <body>
 <div class="container">
 
-    <h2 class="display-4">login.jsp</h2>
+    <h2 class="display-4">login</h2>
     <div class="py-5 text-center">
         <form action="/login" method="post">
             <input class="form-control mb-2" type="text" name="memberId" placeholder="아이디"> <br>

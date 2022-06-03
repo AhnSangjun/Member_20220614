@@ -41,7 +41,7 @@ public class BoardRepository {
     }
 
     public int boardCount() {
-        return sql.selectOne("Borad.count");
+        return sql.selectOne("Board.count");
     }
 
     public List<BoardDTO> pagingList(Map<String, Integer> pagingParam) {

@@ -18,7 +18,7 @@
     </insert>
 
     <select id="findAll" resultType="board">
-        select * from board_table order by id desc
+        select * from board_table order by b_id desc
     </select>
 
     <update id="updateHits" parameterType="Long">

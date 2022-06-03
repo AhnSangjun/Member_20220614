@@ -15,7 +15,10 @@
     <form action="/board/delete" method="post">
         <label for="passwordConfirm">비밀번호를 입력해주세요</label>
         <input type="text" id="passwordConfirm"> <br>
-        <input type="button" onclick="passwordCheck()" value="확인">
+        <input type="button" onclick="function passwordCheck() {
+
+        }
+        passwordCheck()" value="확인">
     </form>
 </body>
 </html>

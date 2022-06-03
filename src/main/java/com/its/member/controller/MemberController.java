@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -16,7 +21,7 @@ public class MemberController {
     @Autowired
     public MemberService memberService;
     @GetMapping("/save-form")
-    public String saveForm() {return "save";}
+    public String saveForm() {return "member/save";}
 
     @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
@@ -30,7 +35,7 @@ public class MemberController {
 
     @GetMapping("/login-form")
     public String loginForm() {
-        return "login";
+        return "member/login";
     }
     @PostMapping("/login")
     public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
@@ -58,5 +63,42 @@ public class MemberController {
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
         return "detail";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        System.out.println("id = " + id);
+        boolean deleteResult = memberService.delete(id);
+        if (deleteResult) {
+            // redirect: 컨트롤러의 메서드에서 다른 메서드의 주소를 호출
+            // redirect 이용하여 findAll 주소 요청
+            return "redirect:/findAll";
+        } else {
+            return "delete-fail";
+        }
+    }
+
+    @GetMapping("/update-form")
+    public String updateForm(HttpSession session, Model model) {
+        // 로그인을 한 상태기 때문에 세샨에 id, memberId가 들어있고
+        // 여기서 세션에 있는 id를 가져온다.
+        Long updateId = (Long) session.getAttribute("loginId");
+        System.out.println("updateId = " + updateId);
+        // DB 해당 회원의 정보를 가져와서 그 정보를 가지고 update.jsp 이동
+        MemberDTO memberDTO = memberService.findById(updateId);
+        model.addAttribute("updateMember", memberDTO);
+        return "update";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        System.out.println("memberDTO = " + memberDTO);
+        boolean updateResult = memberService.update(memberDTO);
+        if (updateResult) {
+            // 해당 회원의 상세정보
+            return "redirect:/detail?id=" + memberDTO.getId();
+        } else {
+            return "update-fail";
+        }
     }
 }

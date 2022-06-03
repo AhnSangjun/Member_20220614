@@ -2,6 +2,7 @@ package com.its.member.controller;
 
 import com.its.member.dto.BoardDTO;
 import com.its.member.dto.CommentDTO;
+import com.its.member.dto.PageDTO;
 import com.its.member.service.BoardService;
 import com.its.member.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/board")
+//@RequestMapping("/board")
 public class BoardController {
     @Autowired
     private BoardService boardService;
@@ -21,30 +22,31 @@ public class BoardController {
     private CommentService commentService;
 
     // 글쓰기 화면 요청
-// @GetMapping("/board/save") // RequestMapping 미적용
-    @GetMapping("/save") // RequestMapping 적용
+//    @GetMapping("/board/save") // RequestMapping 미적용
+    @GetMapping("/board/save") // RequestMapping 적용
     public String saveForm() {
-        return "boardPages/save"; // => views/board/save.jsp
+        return "member/save"; // => views/board/save.jsp
     }
+
     // 글쓰기 처리
 //    @PostingMapping("/board/save") // RequestMapping 미적용
-    @PostMapping("/save") // RequestMapping 적용
+    @PostMapping("/board/save") // RequestMapping 적용
     public String save(@ModelAttribute BoardDTO boardDTO) {
         boolean result = boardService.save(boardDTO);
         if (result) {
 //           return "redirect:/board/findAll"; // => /board/findAll 주소 요청
             // 글쓰기 성공 후 페이징 목록이 보이게
-            return "redirect:/board/paging";
+            return "redirect:/boardPages/paging";
         } else {
             return "boardPages/save-fail";
         }
     }
     // 목록출력
-    @GetMapping("/findAll")
+    @GetMapping("/board/findAll")
     public String findAll(Model model) {
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
-        return "boardPages/List";
+        return "board/boardlist";
     }
 
     // 상세조회
@@ -93,7 +95,7 @@ public class BoardController {
     // 글작성화면(파일)
     @GetMapping("/saveFile")
     public String saveFileForm() {
-        return "board/savefile";
+        return "savefile";
     }
 
     // 파일첨부 글작성 처리
@@ -101,5 +103,29 @@ public class BoardController {
     public String saveFile(@ModelAttribute BoardDTO boardDTO) throws IOException {
         boardService.saveFile(boardDTO);
         return "redirect:/board/findAll";
+    }
+
+    // 페이징 처리
+    @GetMapping("/boardPages/paging")
+//  /board/paging?page=1
+//  required=false로 하면 /board/paging 요청도 가능
+//    별도의 페이지 값을 요청하지 않으면 첫페이지(pgae=1)를 보여주자.
+    public String paging(@RequestParam(value="page", required=false, defaultValue="1") int page,
+                         Model model) {
+        List<BoardDTO> boardList = boardService.pagingList(page);
+        PageDTO paging = boardService.paging(page);
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("paging", paging);
+        return "boardPages/pagingList";
+
+    }
+
+    // 검색처리
+    @GetMapping("/search")
+    public String search(@RequestParam("searchType") String searchType,
+                         @RequestParam("q") String q, Model model) {
+        List<BoardDTO> searchList  = boardService.search(searchType, q);
+        model.addAttribute("boardList", searchList);
+        return "boardPages/list";
     }
 }
