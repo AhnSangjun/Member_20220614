@@ -12,6 +12,11 @@
     <title>title</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <style>
+        container {
+            max-width: 700px;
+        }
+    </style>
 </head>
 <body>
 

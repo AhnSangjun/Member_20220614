@@ -24,9 +24,9 @@
         <form action="/update" method="post" name="member/updateForm">
             id: <input class="form-control mb-2" type="text" name="id" value="${updateMember.id}" readonly>
             memberId: <input class="form-control" type="tel" neme="memberId" value="${updateMember.MemberId}" readonly>
-            memberPassword: <input class="form-control" type="text" name="memberPassword" id="pwConfirm" placeholder="비밀번호를 입력하세요">
-            memberName: <input class="form-control" type="text" name="memberName" value="${updateMember.memberName}" readonly>
-            memberEmail: <input class="form-control" type="text" name="memberEmail" value="${updateMember.memberEmail}"readonly>
+            memberPassword: <input class="form-control" type="password" name="memberPassword" id="pwConfirm" placeholder="비밀번호를 입력하세요">
+            memberName: <input class="form-control" type="name" name="memberName" value="${updateMember.memberName}" readonly>
+            memberEmail: <input class="form-control" type="email" name="memberEmail" value="${updateMember.memberEmail}"readonly>
             memberMobile: <input class="form-control" type="text" name="memberMobile" value="${updateMember.memberMobile}"readonly>
             memberProfile: <input class="form-control" type="file" name="memberProfile" value="${updateMember.memberProfile}"readonly>
             <input class="btn btn-primary" type="button" onclick="update()" value="정보수정">

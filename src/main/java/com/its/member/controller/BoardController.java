@@ -25,7 +25,7 @@ public class BoardController {
 //    @GetMapping("/board/save") // RequestMapping 미적용
     @GetMapping("/board/save") // RequestMapping 적용
     public String saveForm() {
-        return "member/save"; // => views/board/save.jsp
+        return "board/save"; // => views/board/save.jsp
     }
 
     // 글쓰기 처리
@@ -38,7 +38,7 @@ public class BoardController {
             // 글쓰기 성공 후 페이징 목록이 보이게
             return "redirect:/boardPages/paging";
         } else {
-            return "boardPages/save-fail";
+            return "board/save-fail";
         }
     }
     // 목록출력
@@ -46,11 +46,11 @@ public class BoardController {
     public String findAll(Model model) {
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
-        return "board/boardlist";
+        return "board/list";
     }
 
     // 상세조회
-    @GetMapping("/detail")
+    @GetMapping("/board/detail")
     public String findById(@RequestParam("id") Long id, Model model,
                            @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         BoardDTO boardDTO = boardService.findById(id);
@@ -59,7 +59,7 @@ public class BoardController {
         // 댓글 목록도 가져가야 함.
         List<CommentDTO> commentDTOList = commentService.findAll(id);
         model.addAttribute("commentList", commentDTOList);
-        return "boardPages/detail";
+        return "board/detail";
     }
 
     // 비밀번호 체크 페이지
@@ -67,7 +67,7 @@ public class BoardController {
     public String passwordCheck(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
-        return "boardPages/passwordCheck";
+        return "board/passwordCheck";
     }
 
     // 삭제처리
@@ -82,7 +82,7 @@ public class BoardController {
     public String update(@RequestParam("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate", boardDTO);
-        return "boardPages/update";
+        return "board/update";
     }
 
     // 수정 처리
@@ -93,9 +93,9 @@ public class BoardController {
     }
 
     // 글작성화면(파일)
-    @GetMapping("/saveFile")
+    @GetMapping("/board/saveFile")
     public String saveFileForm() {
-        return "savefile";
+        return "/board/save file";
     }
 
     // 파일첨부 글작성 처리

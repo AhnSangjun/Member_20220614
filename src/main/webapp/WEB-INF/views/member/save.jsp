@@ -23,10 +23,11 @@
                 <div class="py-5 text-center">
 
         <form action="/save" method="post">
-            <input class="form-control mb-2" type="text" name="memberId" placeholder="아이디">
-            <input class="form-control mb-2" type="text" name="memberPassword" placeholder="비밀번호">
+            <input class="form-control mb-2" type="text" onblur="duplicateCheck()" id="memberId" name="memberId" placeholder="아이디">
+            <span id="dup-check-result"></span>
+            <input class="form-control mb-2" type="password" name="memberPassword" placeholder="비밀번호">
             <input class="form-control mb-2" type="text" name="memberName" placeholder="이름">
-            <input class="form-control mb-2" type="text" name="memberEmail" placeholder="이메일">
+            <input class="form-control mb-2" type="email" name="memberEmail" placeholder="이메일">
             <input class="form-control mb-2" type="text" name="memberMobile" placeholder="전화번호">
             <input class="form-control mb-2" type="file" name="memberProfile" placeholder="프로필사진">
             <input class="btn btn-primary" type="submit" value="회원가입">
@@ -47,6 +48,10 @@
                 if (result == "ok"){
                     // 사용가능한 아이디
                     checkResult.innerHTML = "사용가능합니다.";
+                    checkResult.style = "green";
+                } else {
+                    // 이미 사용중인 아이디
+                    checkResult.innerHTML = "이미 사용중인 아이디입니다.";
                     checkResult.style = "red";
                 }
                 alert("ajax 성공");

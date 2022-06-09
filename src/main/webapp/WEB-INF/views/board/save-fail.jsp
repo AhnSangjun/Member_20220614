@@ -14,13 +14,13 @@
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
-    <h2 class="display-4 fw-normal">save.jsp</h2>
+    <h2 class="display-4 fw-normal">글작성</h2>
     <div class="py-5 text-center">
 
-        <form action="/board/saveFile" method="post" enctype="multipart/form-data">
+        <form action="/board/save File" method="post" enctype="multipart/form-data">
             <input class="form-control mb-2" type="text" name="boardTitle" placeholder="제목">
             <input class="form-control mb-2" type="text" name="boardWriter" placeholder="작성자">
-            <input class="form-control mb-2" type="password" name="boardPassword" placeholder="비밀번호">
+            <input class="form-control mb-2" type="passwords" name="boardPassword" placeholder="비밀번호">
             <textarea class="form-control mb-2" name="boardContents" rows="5" cols="10"></textarea>
             첨부파일: <input type="file" name="boardFile">
             <input class="btn btn-primary" type="submit" value="글작성">
