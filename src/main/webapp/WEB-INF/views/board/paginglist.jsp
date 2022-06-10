@@ -12,7 +12,7 @@
 <head>
     <title>Title</title>
     <!-- CSS only -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>

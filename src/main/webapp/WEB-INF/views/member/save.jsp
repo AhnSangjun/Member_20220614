@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -9,8 +10,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <script src="/resources/js/jquery.js"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+    <script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <style>
         .container {
             max-width: 500px;
@@ -19,8 +20,8 @@
 </head>
 <body>
 <div class="container">
-            <h2 class="display-4 fw-normal">회원가입</h2>
-                <div class="py-5 text-center">
+    <h2 class="display-4 fw-normal">회원가입</h2>
+    <div class="py-5 text-center">
 
         <form action="/save" method="post">
             <input class="form-control mb-2" type="text" onblur="duplicateCheck()" id="memberId" name="memberId" placeholder="아이디">
@@ -29,7 +30,7 @@
             <input class="form-control mb-2" type="text" name="memberName" placeholder="이름">
             <input class="form-control mb-2" type="email" name="memberEmail" placeholder="이메일">
             <input class="form-control mb-2" type="text" name="memberMobile" placeholder="전화번호">
-            <input class="form-control mb-2" type="file" name="memberProfile" placeholder="프로필사진">
+            <input class="form-control mb-2" type="file" name="memberProfile" placeholder="프로필">
             <input class="btn btn-primary" type="submit" value="회원가입">
         </form>
     </div>
@@ -37,21 +38,21 @@
 </body>
 <script>
     const duplicateCheck = () => {
-        const memberId = document.getElementById("memberId").value;
+        const  memberId = document.getElementById("memberId").value;
         const checkResult = document.getElementById("dup-check-result");
         $.ajax({
             type: "post", // http request method
             url: "duplicate-check", // 요청주소(컨트롤러 주소값)
             data: {"memberId":memberId}, // 전송하는 파라미터
             dataType: "text", // 리턴받을 데이터 형식
-            success: function () {
+            success: function (result) {
                 if (result == "ok"){
                     // 사용가능한 아이디
                     checkResult.innerHTML = "사용가능합니다.";
                     checkResult.style = "green";
                 } else {
                     // 이미 사용중인 아이디
-                    checkResult.innerHTML = "이미 사용중인 아이디입니다.";
+                    checkResult.innerHTML = "이미 사용중인 아이디입니다."
                     checkResult.style = "red";
                 }
                 alert("ajax 성공");
