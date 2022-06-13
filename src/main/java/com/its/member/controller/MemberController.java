@@ -111,5 +111,13 @@ public class MemberController {
         return checkResult; // ok.jsp 또는 no.jsp 를 찾음.
     }
 
-
+    @GetMapping("/response-test")
+    public @ResponseBody String responseTest() {
+        return "main";
+    }
+    @GetMapping("/response-test2")
+    public @ResponseBody List<MemberDTO> responseTest2() {
+        return memberService.findAll();
+    }
 }
+

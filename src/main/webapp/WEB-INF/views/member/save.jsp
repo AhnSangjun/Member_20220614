@@ -2,15 +2,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 2022-05-27
-  Time: 오전 9:45
+  Date: 2022-05-19
+  Time: 오후 1:30
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <style>
         .container {
@@ -26,11 +26,12 @@
         <form action="/save" method="post">
             <input class="form-control mb-2" type="text" onblur="duplicateCheck()" id="memberId" name="memberId" placeholder="아이디">
             <span id="dup-check-result"></span>
-            <input class="form-control mb-2" type="password" name="memberPassword" placeholder="비밀번호">
+            <input class="form-control mb-2" type="password" onblur="pwCheck()" id="memberPassword" name="memberPassword" placeholder="비밀번호 8~16자 숫자,영문소문자, 특수문자">
+            <p id="pw-check-result"></p>
             <input class="form-control mb-2" type="text" name="memberName" placeholder="이름">
             <input class="form-control mb-2" type="email" name="memberEmail" placeholder="이메일">
             <input class="form-control mb-2" type="text" name="memberMobile" placeholder="전화번호">
-            <input class="form-control mb-2" type="file" name="memberProfile" placeholder="프로필">
+            <input class="form-control mb-2" type="file" name="memberProfile" placeholder="프로필사진">
             <input class="btn btn-primary" type="submit" value="회원가입">
         </form>
     </div>
@@ -49,11 +50,11 @@
                 if (result == "ok"){
                     // 사용가능한 아이디
                     checkResult.innerHTML = "사용가능합니다.";
-                    checkResult.style = "green";
+                    checkResult.style.color = "green";
                 } else {
                     // 이미 사용중인 아이디
                     checkResult.innerHTML = "이미 사용중인 아이디입니다."
-                    checkResult.style = "red";
+                    checkResult.style.color = "red";
                 }
                 alert("ajax 성공");
             },
@@ -61,6 +62,17 @@
                 alert("오타체크");
             }
         });
+    }
+    const pwCheck = () => { <%-- 비밀번호 innerHTML 형태로 확인 추가 --%>
+        const memberPassword = document.getElementById("memberPassword").value;
+        const checkResult = document.getElementById("pw-check-result");
+        if ( memberPassword !== pwCheck ) {
+            checkResult.innerHTML = "일치합니다.";
+            checkResult.style.color = "green";
+        }  else {
+            checkResult.innerHTML = "일치하지않습니다.";
+            checkResult.style.color = "red";
+        }
     }
 </script>
 </html>

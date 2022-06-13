@@ -20,7 +20,7 @@
 
     <form action="/board/save" method="post">
       <input class="form-control mb-2" type="text" name="boardTitle" placeholder="제목">
-      <input class="form-control mb-2" type="text" name="boardWriter" placeholder="작성자">
+      <input class="form-control mb-2" type="name" name="boardWriter" placeholder="작성자">
       <input class="form-control mb-2" type="password" name="boardPassword" placeholder="비밀번호">
       <textarea class="form-control mb-2" name="boardContents" rows="5" cols="10"></textarea>
       <input class="btn btn-primary" type="submit" value="글작성">

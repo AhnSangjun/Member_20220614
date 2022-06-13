@@ -29,6 +29,7 @@
         update member_table set memberPhone=#{memberPhone} where id=#{id}
     </update>
 
+
     <select id="duplicate" parameterType="String" resultType="String">
         select  memberId from member_table where memberId=#{memberId}
     </select>

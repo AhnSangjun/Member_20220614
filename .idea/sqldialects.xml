@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/9e842d70-23f7-4d6f-b168-4f450d41f660/console.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/memberMapper.xml" dialect="CassandraQL" />
   </component>
 </project>
